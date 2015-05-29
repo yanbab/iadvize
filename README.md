@@ -1,2 +1,1 @@
-# iadvize
-iAdvize / VDM php test
+# iadvize - test php
