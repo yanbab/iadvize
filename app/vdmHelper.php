@@ -56,8 +56,8 @@ class vdmHelper {
     $story = [];
     
     // retrieve id
-    $story["id_vdm"] = $this->queryNode("a[@class='jTip']", $xpath, $tag);
-    $story["id_vdm"] = substr($story["id_vdm"], 1); // remove "#"
+    $story["id"] = $this->queryNode("a[@class='jTip']", $xpath, $tag);
+    $story["id"] = substr($story["id"], 1); // remove "#"
     
     // retrieve content
     $story["content"] =$this->queryNode("a[@class='fmllink']", $xpath, $tag);

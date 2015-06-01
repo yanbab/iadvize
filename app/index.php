@@ -61,7 +61,7 @@ $app->get("/api/posts/:id", function($id_vdm) use ($app)  {
   echo json_encode($posts->fetch());
 });
 
-$app->get("/api/fetch(/:nb)", function($total = 200) use ($app)  {
+$app->get("/api/fetch(/:total)", function($total = 200) use ($app)  {
   echo "Fetching $total stories... ";
   $vdm = new vdmHelper;
   $stories = $vdm->fetchStories($total);
