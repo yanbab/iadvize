@@ -42,7 +42,7 @@ $app->get("/", function() {
 });
 
 $app->get("/api/posts(/)", function() use ($app) {
-  $stories = $app->db->vdm();
+  $stories = $app->db->vdm;
   if(isset($_GET['from'])) {
     $stories->where("date > ?", $_GET['from']);
   }
@@ -52,13 +52,22 @@ $app->get("/api/posts(/)", function() use ($app) {
   if(isset($_GET['author'])) {
     $stories->where("author = ?", $_GET['author']);
   }
-  echo json_encode($stories);
+  // transforms result object to array
+  $stories = array_map('iterator_to_array', iterator_to_array($stories));
+  // remove indexes from array
+  $stories = array_values((array)$stories);
+  //print_r($stories);die;
+  echo json_encode([
+    "posts" => $stories,
+    "count" => count($stories)
+  ]);
 });
 
 $app->get("/api/posts/:id", function($id) use ($app)  {
-  $posts = $app->db->vdm()
-    ->where("id = ?", $id);
-  echo json_encode($posts->fetch());
+  $post = $app->db->vdm->where("id = ?", $id);
+  echo json_encode([
+    "post" => $post->fetch()
+  ]);
 });
 
 $app->get("/api/fetch(/:total)", function($total = 200) use ($app)  {

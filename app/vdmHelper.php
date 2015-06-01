@@ -97,5 +97,4 @@ class vdmHelper {
     $db->vdm->insert_multi($stories);
   }
   
-  
 }
