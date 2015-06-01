@@ -4,7 +4,7 @@
  * CLI Script to fetch and save VDM stories
  */
 
-$config = require "./config.php";
+$config = require "config.php";
 
 // FIXME: should be a POST request
 // (using GET for now for simplicity)
