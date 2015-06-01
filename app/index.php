@@ -52,12 +52,12 @@ $app->get("/api/posts(/)", function() use ($app) {
   if(isset($_GET['author'])) {
     $stories->where("author = ?", $_GET['author']);
   }
-  echo json_encode($stories->fetch());
+  echo json_encode($stories);
 });
 
-$app->get("/api/posts/:id", function($id_vdm) use ($app)  {
+$app->get("/api/posts/:id", function($id) use ($app)  {
   $posts = $app->db->vdm()
-    ->where("id_vdm = ?", $id_vdm);
+    ->where("id = ?", $id);
   echo json_encode($posts->fetch());
 });
 
