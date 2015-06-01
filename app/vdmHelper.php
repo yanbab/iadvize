@@ -32,7 +32,7 @@ class vdmHelper {
         
         // Format story
         $story = $this->splitStory($tag, $xpath);
-        
+
         if($nb_stories < $total) {
           $stories[] = $story;
           $nb_stories++;

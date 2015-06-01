@@ -47,7 +47,7 @@ $app->get("/api/posts(/)", function() use ($app) {
     $stories->where("date > ?", $_GET['from']);
   }
   if(isset($_GET['to'])) {
-    $stories->where("from > ?", $_GET['to']);
+    $stories->where("date <= ?", $_GET['to']);
   }
   if(isset($_GET['author'])) {
     $stories->where("author = ?", $_GET['author']);
@@ -56,18 +56,18 @@ $app->get("/api/posts(/)", function() use ($app) {
   $stories = array_map('iterator_to_array', iterator_to_array($stories));
   // remove indexes from array
   $stories = array_values((array)$stories);
-  //print_r($stories);die;
+
   echo json_encode([
     "posts" => $stories,
     "count" => count($stories)
-  ]);
+  ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 });
 
 $app->get("/api/posts/:id", function($id) use ($app)  {
-  $post = $app->db->vdm->where("id = ?", $id);
+  $post = $app->db->vdm[$id];
   echo json_encode([
-    "post" => $post->fetch()
-  ]);
+    "post" => $post
+  ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 });
 
 $app->get("/api/fetch(/:total)", function($total = 200) use ($app)  {
@@ -76,7 +76,6 @@ $app->get("/api/fetch(/:total)", function($total = 200) use ($app)  {
   $stories = $vdm->fetchStories($total);
   $vdm->storeStories($app->db, $stories);
   echo "Done !";
-  //print_r($stories);
 });
 
 
