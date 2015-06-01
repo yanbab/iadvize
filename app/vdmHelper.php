@@ -60,7 +60,7 @@ class vdmHelper {
     $story["id"] = substr($story["id"], 1); // remove "#"
     
     // retrieve content
-    $story["content"] =$this->queryNode("a[@class='fmllink']", $xpath, $tag);
+    $story["content"] = $this->queryNode("a[@class='fmllink']", $xpath, $tag);
     
     // retrieve and format date
     $str = $this->queryNode("div[@class='right_part']", $xpath, $tag);
@@ -95,6 +95,10 @@ class vdmHelper {
   public function storeStories($db, $stories) {
     $db->vdm->delete();
     $db->vdm->insert_multi($stories);
+  }
+  
+  public function totest() {
+    return "boo";
   }
   
 }
